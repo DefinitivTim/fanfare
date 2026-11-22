@@ -1,0 +1,60 @@
+name: Bug report
+description: Something in Fanfare is broken, crashes or behaves wrongly.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! Please make sure you are on the latest version of Fanfare before reporting.
+  - type: input
+    id: mod_version
+    attributes:
+      label: Fanfare version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: neoforge_version
+    attributes:
+      label: Minecraft and NeoForge version
+      placeholder: "1.21.1, NeoForge 21.1.x"
+    validations:
+      required: true
+  - type: input
+    id: modpack
+    attributes:
+      label: Modpack
+      description: The modpack you play, if any (for example Farbound). Otherwise list the relevant other mods.
+      placeholder: "Farbound 1.0.0"
+  - type: dropdown
+    id: side
+    attributes:
+      label: Singleplayer or multiplayer?
+      options:
+        - Singleplayer
+        - Multiplayer (client)
+        - Multiplayer (server side problem)
+    validations:
+      required: true
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what did you get instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Paste a link to your `latest.log` (for example via https://mclo.gs) or attach it.
+        For crashes, include the file from the `crash-reports` folder.

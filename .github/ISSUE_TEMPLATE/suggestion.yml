@@ -1,0 +1,21 @@
+name: Suggestion
+description: An idea or improvement for Fanfare.
+title: "[Suggestion] "
+labels: ["suggestion"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to see?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why would it help?
+      description: Which problem does it solve, or what does it make easier?
+  - type: input
+    id: link
+    attributes:
+      label: Related mod (if any)
+      placeholder: "https://modrinth.com/mod/..."
