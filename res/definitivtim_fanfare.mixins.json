@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "de.definitivtim.fanfare.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
+  "client": [
+    "FancyQuestCompatMixin",
+    "FancyToastHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

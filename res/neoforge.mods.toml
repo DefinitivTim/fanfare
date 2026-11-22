@@ -1,0 +1,42 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+[[mods]]
+modId = "definitivtim_fanfare"
+version = "0.3.0"
+displayName = "DefinitivTim's Fanfare"
+logoFile = "definitivtim_fanfare.png"
+description = '''Lets each quest of FTB Quests choose the kind of its completion toast with a quest tag: toast_task, toast_goal or toast_challenge. Client side only, FTB Quests keeps all quest data.'''
+authors = "DefinitivTim"
+
+[[mixins]]
+config = "definitivtim_fanfare.mixins.json"
+
+[[dependencies.definitivtim_fanfare]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.definitivtim_fanfare]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.definitivtim_fanfare]]
+modId = "ftbquests"
+type = "required"
+versionRange = "[2101.1.38,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.definitivtim_fanfare]]
+modId = "fancytoasts"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "CLIENT"
