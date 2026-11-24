@@ -4,10 +4,10 @@ license = "MIT"
 
 [[mods]]
 modId = "definitivtim_fanfare"
-version = "0.3.0"
+version = "0.4.0"
 displayName = "DefinitivTim's Fanfare"
 logoFile = "definitivtim_fanfare.png"
-description = '''Lets each quest of FTB Quests choose the kind of its completion toast with a quest tag: toast_task, toast_goal or toast_challenge. Client side only, FTB Quests keeps all quest data.'''
+description = '''Lets each quest of FTB Quests choose the kind of its completion toast with a quest tag: toast_task, toast_goal or toast_challenge. Adds the quest task type Chapter Progress, which counts the completed quests of a chapter. Needed on the server and on every client once a quest uses Chapter Progress.'''
 authors = "DefinitivTim"
 
 [[mixins]]
@@ -18,21 +18,21 @@ modId = "neoforge"
 type = "required"
 versionRange = "[21.1,)"
 ordering = "NONE"
-side = "CLIENT"
+side = "BOTH"
 
 [[dependencies.definitivtim_fanfare]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
-side = "CLIENT"
+side = "BOTH"
 
 [[dependencies.definitivtim_fanfare]]
 modId = "ftbquests"
 type = "required"
 versionRange = "[2101.1.38,)"
 ordering = "AFTER"
-side = "CLIENT"
+side = "BOTH"
 
 [[dependencies.definitivtim_fanfare]]
 modId = "fancytoasts"

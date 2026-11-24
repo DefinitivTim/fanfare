@@ -20,5 +20,11 @@
   "definitivtim_fanfare.configuration.iconFrame": "Frame around the icon",
   "definitivtim_fanfare.configuration.iconFrame.tooltip": "Draws the advancement frame of the kind around the quest icon.",
   "definitivtim_fanfare.configuration.displaySeconds": "Display time in seconds",
-  "definitivtim_fanfare.configuration.displaySeconds.tooltip": "How long the toast stays on screen."
+  "definitivtim_fanfare.configuration.displaySeconds.tooltip": "How long the toast stays on screen.",
+  "ftbquests.task.definitivtim_fanfare.chapter_progress": "Chapter Progress",
+  "definitivtim_fanfare.task.chapter_progress.title": "Complete chapter %s",
+  "definitivtim_fanfare.task.chapter_progress.chapter": "Chapter",
+  "definitivtim_fanfare.task.chapter_progress.chapter.tooltip": "Chapter whose quests are counted. Empty: the chapter this quest is in.",
+  "definitivtim_fanfare.task.chapter_progress.include_optional": "Count optional quests",
+  "definitivtim_fanfare.task.chapter_progress.include_optional.tooltip": "Off: optional quests are not counted, like the chapter percentage of FTB Quests. On: they have to be completed too."
 }

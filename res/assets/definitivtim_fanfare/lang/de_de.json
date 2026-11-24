@@ -20,5 +20,11 @@
   "definitivtim_fanfare.configuration.iconFrame": "Rahmen um das Icon",
   "definitivtim_fanfare.configuration.iconFrame.tooltip": "Zeichnet den Advancement-Rahmen der jeweiligen Art um das Quest-Icon.",
   "definitivtim_fanfare.configuration.displaySeconds": "Anzeigedauer in Sekunden",
-  "definitivtim_fanfare.configuration.displaySeconds.tooltip": "Wie lange die Anzeige sichtbar bleibt."
+  "definitivtim_fanfare.configuration.displaySeconds.tooltip": "Wie lange die Anzeige sichtbar bleibt.",
+  "ftbquests.task.definitivtim_fanfare.chapter_progress": "Kapitel-Fortschritt",
+  "definitivtim_fanfare.task.chapter_progress.title": "Kapitel %s abschließen",
+  "definitivtim_fanfare.task.chapter_progress.chapter": "Kapitel",
+  "definitivtim_fanfare.task.chapter_progress.chapter.tooltip": "Kapitel, dessen Quests gezählt werden. Leer: das Kapitel, in dem diese Quest steht.",
+  "definitivtim_fanfare.task.chapter_progress.include_optional": "Optionale Quests mitzählen",
+  "definitivtim_fanfare.task.chapter_progress.include_optional.tooltip": "Aus: optionale Quests zählen nicht, wie bei der Kapitel-Prozentanzeige von FTB Quests. An: sie müssen ebenfalls erledigt sein."
 }

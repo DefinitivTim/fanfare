@@ -1,6 +1,57 @@
 > Renamed on 2026-11-22: formerly `farbound_quest_achievements` (0.2.0). New mod ID `definitivtim_fanfare`, new package, own icon, version 0.3.0. Behaviour is unchanged: the jar was produced by renaming the compiled 0.2.0 jar, not by a new compile.
 > Config files are now named after the new mod ID. Remove the old jar when installing this one.
 
+# 0.4.0 (2026-11-24): Chapter Progress task
+
+New quest task type `definitivtim_fanfare:chapter_progress` ("Chapter Progress" / "Kapitel-Fortschritt").
+Shows `done/total` for the quests of a chapter and completes when all are done.
+
+## Design decisions (DefinitivTim)
+- Lives in Fanfare, not in a separate mod. Accepted consequence: Fanfare is no longer client only.
+- Chapter is selectable in the editor. Not set (stored as 0) means the chapter the quest is in, so moving the quest
+  to another chapter moves the target along.
+- Switch "Count optional quests", default off.
+- Completes automatically, no click needed.
+
+## How it works
+- Registered in the mod constructor with `TaskTypes.register` (public API of FTB Quests, same way as More Quest Types),
+  on both sides. `@Mod` no longer has `dist = CLIENT`. Client parts (config, config screen, toast listener) moved to
+  `ClientInit`, called only when `FMLEnvironment.dist == CLIENT`, so a dedicated server never loads client classes.
+- `ChapterProgressTask extends Task`. `autoSubmitOnPlayerTick() = 20`: FTB Quests calls `submitTask` once a second per
+  online player while the task is open and the quest can be started. `submitTask` sets the progress to the number of
+  counted quests the team has completed. `TeamData.setProgress` clamps to `getMaxProgress`.
+- `getMaxProgress` = number of counted quests (at least 1; an empty chapter counts as done). Recomputed at most once a
+  second and after `readData`, `readNetData`, editor changes and `clearCachedData`.
+- Not counted: the own quest, every quest that depends on it (transitively, via `Quest.getDependants`), repeatable
+  quests (`canBeRepeated`), optional quests unless switched on, and quests that contain a Chapter Progress task for the
+  same chapter (two of them would block each other).
+- Not taken into account: team specific exclusion by "other questline" (`isExcludedByOtherQuestline`), because
+  `getMaxProgress` has no team. Quests excluded that way still count.
+- Data: SNBT keys `chapter` (long, only written when set) and `include_optional` (only written when true).
+  Network: `writeVarLong(chapter)`, `writeBoolean(includeOptional)`.
+- Editor: `ConfigQuestObject<Chapter>(QuestObjectType.CHAPTER)` like `RandomReward` does for tables, plus `addBool`.
+- Title in the quest view: "Complete chapter <name>", icon: the chapter icon. Type icon: `Icons.BOOK`.
+
+## Sides and compatibility
+- Server without Fanfare but a quest file with this task: FTB Quests cannot create the task ("Unknown task type").
+- Client without Fanfare: FTB Quests skips unknown task types in its type table on login, so joining works as long as
+  no quest uses this task. Once one does, every client needs Fanfare. NeoForge does not enforce this.
+- If `TaskTypes.register` fails after an FTB Quests update, the log says
+  `quest task type chapter_progress could not be registered` and quests using it will not load. Toasts keep working.
+
+## New stubs
+`nbt/CompoundTag`, `core/HolderLookup`, `network/FriendlyByteBuf`, `network/RegistryFriendlyByteBuf`,
+`server/level/ServerPlayer`, plus `Component.translatable(String, Object...)` and
+`ResourceLocation.fromNamespaceAndPath`. Every descriptor was checked against calls in FTB Quests 2101.1.38 bytecode.
+
+## Verified
+- Compiled with `javac --release 21` against FTB Quests 2101.1.38, FTB Library 2101.1.39, FTB Teams 2101.1.12,
+  Architectury 13.0.12, Fancy Toasts 1.5.1 (from the Farbound Staging profile).
+- All references to FTB Quests, FTB Library and Fancy Toasts resolved against the real jars. All Minecraft and
+  NeoForge references are also used by FTB Quests or by Fanfare 0.3.0.
+- Toast classes are bytecode identical to 0.3.0 (constant pool indices aside).
+- Not tested in game.
+
 # DefinitivTim's Fanfare 0.2.0
 
 Client side addon for FTB Quests (NeoForge 1.21.1). Each quest or chapter can choose the kind of its completion toast.
