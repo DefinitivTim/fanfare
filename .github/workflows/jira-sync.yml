@@ -1,12 +1,13 @@
 name: Sync GitHub Issues to Jira
 
-# Legt bei jedem neuen GitHub-Issue automatisch ein passendes Jira-Issue im
-# Projekt FAR (definitivtim.atlassian.net) an und kommentiert den Jira-Link
-# zurueck ins GitHub-Issue. Gleiches Vorgehen wie im Repo DefinitivTim/farbound.
+# Legt bei jedem neuen GitHub-Issue automatisch ein passendes Jira-Issue
+# (Typ Issue) im Jira-Bereich Fanfare, Key FF (definitivtim.atlassian.net), an
+# und kommentiert den Jira-Link zurueck ins GitHub-Issue. Gleiches Vorgehen wie
+# im Repo DefinitivTim/farbound, aber im Bereich der Mod statt in FAR.
 #
-# Die Jira-Issues bekommen die Labels "github" und "fanfare", damit man sie in
-# FAR von den Farbound-Issues und den anderen Mods unterscheiden kann.
-# Die Antworten aus dem Issue-Formular landen gegliedert in der Beschreibung.
+# Die Jira-Issues bekommen die Labels "github" und "fanfare".
+# Die Antworten aus dem Issue-Formular landen gegliedert in der Beschreibung,
+# auch die Logs (Fanfare hat kein eigenes Logs-Feld wie Farbound).
 #
 # Benoetigte Repo-Secrets (Settings -> Secrets and variables -> Actions):
 #   JIRA_EMAIL      die Atlassian-Account-E-Mail von Tim
@@ -50,7 +51,7 @@ jobs:
                   sections.append((label.strip(), value))
 
           fields = {
-              "project": {"key": "FAR"},
+              "project": {"key": "FF"},
               "summary": title,
               "issuetype": {"name": "Issue"},
               "labels": ["github", "fanfare"] + [re.sub(r"\s+", "-", l) for l in gh_labels],
@@ -59,9 +60,6 @@ jobs:
           description_lines = [f"GitHub Issue ({'Fanfare'}): {url}"]
           if sections:
               for label, value in sections:
-                  # Logs ist ein Jira-URL-Feld: nur setzen, wenn es wirklich eine URL ist.
-                  if label == "Logs" and re.match(r"^https?://\S+$", value):
-                      fields["customfield_10051"] = value
                   description_lines += ["", f"h3. {label}", value]
           elif body.strip():
               description_lines += ["", body.strip()]
